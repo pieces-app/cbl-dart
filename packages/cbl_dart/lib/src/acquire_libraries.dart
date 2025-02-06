@@ -184,15 +184,15 @@ Future<LibrariesConfiguration> acquireLibraries({
 
   final packages = await Future.wait(packageConfigs.map(loader.load));
 
-  if (!areMergedNativeLibrariesInstalled(
-    packages,
-    directory: mergedNativeLibrariesDir,
-  )) {
-    await installMergedNativeLibraries(
-      packages,
-      directory: mergedNativeLibrariesDir,
-    );
-  }
+  // if (!areMergedNativeLibrariesInstalled(
+  //   packages,
+  //   directory: mergedNativeLibrariesDir,
+  // )) {
+  //   await installMergedNativeLibraries(
+  //     packages,
+  //     directory: mergedNativeLibrariesDir,
+  //   );
+  // }
 
   return mergedNativeLibrariesConfigurations(
     packages,
