@@ -141,7 +141,8 @@ Future<LibrariesConfiguration> acquireLibraries({
       // copy our dynamic libs into here...
       for (var entity in Directory('$mergedNativeLibrariesDir/$uuid').listSync()) {
         if (entity.path.contains('libcblite.')) {
-          await File(entity.path).copy(cblDirectory.path);
+          File new_file = await File('${cblDirectory.path}/${entity.path.split('/').last}').create(recursive: true);
+          await File(entity.path).copy(new_file.path);
         }
       }
     }
@@ -152,7 +153,8 @@ Future<LibrariesConfiguration> acquireLibraries({
       // copy our dynamic libs into here...
       for (var entity in Directory('$mergedNativeLibrariesDir/$uuid').listSync()) {
         if (entity.path.contains('libcblitedart')) {
-          await File(entity.path).copy(cblDartDirectory.path);
+          File new_file = await File('${cblDartDirectory.path}/${entity.path.split('/').last}').create(recursive: true);
+          await File(entity.path).copy(new_file.path);
         }
       }
     }
