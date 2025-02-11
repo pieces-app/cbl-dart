@@ -30,9 +30,9 @@ class IsolateContext {
   static bool get isInitialized => _instance != null;
 
   static set instance(IsolateContext value) {
-    // if (_instance != null) {
-    //   throwAlreadyInitializedError();
-    // }
+    if (_instance != null) {
+      throwAlreadyInitializedError();
+    }
     _instance = value;
   }
 
