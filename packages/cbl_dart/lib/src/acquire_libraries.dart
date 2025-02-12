@@ -306,7 +306,10 @@ Future<LibrariesConfiguration> acquireLibraries({
     DatabasePackageConfig.all(
       releases: latestReleases,
       edition: edition,
-    ).where((config) => config.os == OS.current),
+    ).where((config) {
+      print('config: ${config.library.libraryName(config.os)}');
+      return config.os == OS.current;
+    }),
   );
 
   if (edition == Edition.enterprise && !(skipVectorSearch ?? false)) {
