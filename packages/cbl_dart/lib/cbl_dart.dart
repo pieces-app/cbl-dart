@@ -33,6 +33,7 @@ abstract final class CouchbaseLiteDart {
     required Edition edition,
     String? filesDir,
     String? nativeLibrariesDir,
+    bool? skipVectorSearch,
   }) =>
       asyncOperationTracePoint(InitializeOp.new, () async {
         final context = filesDir == null ? null : await _initContext(filesDir);
@@ -40,6 +41,7 @@ abstract final class CouchbaseLiteDart {
         final libraries = await acquireLibraries(
           edition: edition,
           mergedNativeLibrariesDir: nativeLibrariesDir,
+          skipVectorSearch: skipVectorSearch,
         );
 
         await initPrimaryIsolate(IsolateContext(
