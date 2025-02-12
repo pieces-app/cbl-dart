@@ -191,15 +191,15 @@ Future<LibrariesConfiguration> acquireLibraries({
       }
     }
 
-    if (skipVectorSearch ?? false == true) {
-      return LibrariesConfiguration(
-        enterpriseEdition: edition == Edition.enterprise,
-        directory: mergedNativeLibrariesDir,
-        cbl: LibraryConfiguration.dynamic('$uuid\\cblite'),
-        cblDart: LibraryConfiguration.dynamic('$uuid\\cblitedart'),
-        vectorSearch: null,
-      );
-    }
+    // if (skipVectorSearch ?? false == true) {
+    //   return LibrariesConfiguration(
+    //     enterpriseEdition: edition == Edition.enterprise,
+    //     directory: mergedNativeLibrariesDir,
+    //     cbl: LibraryConfiguration.dynamic('$uuid\\cblite'),
+    //     cblDart: LibraryConfiguration.dynamic('$uuid\\cblitedart'),
+    //     vectorSearch: null,
+    //   );
+    // }
   } else if (Platform.isMacOS) {
     String uuid = 'c4f61c9bde1085be63f32dd54ca8829e';
 
@@ -273,9 +273,7 @@ Future<LibrariesConfiguration> acquireLibraries({
     }
 
     // before we continue rolling here we also need to copy these files to a different dir structure as well.
-
     // return our libraries
-
     // if (skipVectorSearch ?? false == true) {
     //   return LibrariesConfiguration(
     //     enterpriseEdition: edition == Edition.enterprise,
