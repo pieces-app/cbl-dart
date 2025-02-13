@@ -320,3 +320,5 @@ doc/api/
 ## Flutter
 .flutter-plugins
 .flutter-plugins-dependencies
+/assets
+/packages/cbl_dart/test/local_assets_test
