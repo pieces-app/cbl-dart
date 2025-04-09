@@ -34,6 +34,7 @@ abstract final class CouchbaseLiteDart {
     String? filesDir,
     String? nativeLibrariesDir,
     bool? skipVectorSearch,
+    bool autoEnableVectorSearch = true,
   }) =>
       asyncOperationTracePoint(InitializeOp.new, () async {
         final context = filesDir == null ? null : await _initContext(filesDir);
@@ -44,10 +45,52 @@ abstract final class CouchbaseLiteDart {
           skipVectorSearch: skipVectorSearch,
         );
 
-        await initPrimaryIsolate(IsolateContext(
-          initContext: context,
-          libraries: libraries,
-        ));
+        if (skipVectorSearch == true) {
+          autoEnableVectorSearch == false;
+        }
+
+        await initPrimaryIsolate(
+          IsolateContext(
+            initContext: context,
+            libraries: libraries,
+          ),
+          autoEnableVectorSearch: autoEnableVectorSearch,
+        );
+      });
+
+  /// Initializes the `cbl` package using pre-bundled libraries from local assets.
+  ///
+  /// This initialization method expects libraries to be pre-bundled at [binaryDependencies]
+  /// in a platform-specific directory structure.
+  ///
+  /// If specified, [databaseLocation] is used to store files created by Couchbase Lite
+  /// by default. For example if a [Database] is opened or copied without
+  /// specifying a [DatabaseConfiguration.directory], a subdirectory in the
+  /// directory specified here will be used. If no [databaseLocation] directory is
+  /// provided, the working directory is used when opening and copying databases.
+  static Future<void> initWithLocalBinaryDependencies({
+    required Directory binaryDependencies,
+    required Edition edition,
+    Directory? databaseLocation,
+    bool skipVectorSearch = false,
+  }) =>
+      asyncOperationTracePoint(InitializeOp.new, () async {
+        final context = databaseLocation == null ? null : await _initContext(databaseLocation.path);
+
+        final config = LocalAssetsConfiguration(
+          binaryDependencies: binaryDependencies,
+          edition: edition,
+          skipVectorSearch: skipVectorSearch,
+        )..verifyLibrariesExist();
+
+        await initPrimaryIsolate(
+          IsolateContext(
+            initContext: context,
+            libraries: config.toLibrariesConfiguration(),
+          ),
+          // note: we will only want to enable vectorSearch if vector search is available
+          autoEnableVectorSearch: !skipVectorSearch,
+        );
       });
 
   /// Initializes the `cbl` package using pre-bundled libraries from local assets.

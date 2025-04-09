@@ -3,8 +3,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cbl/cbl.dart';
 import 'package:cbl_flutter/cbl_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart' as ft;
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,15 +26,14 @@ final class FlutterCblE2eTestBinding extends CblE2eTestBinding {
   }
 
   @override
-  FutureOr<void> initCouchbaseLite() => CouchbaseLiteFlutter.init();
+  FutureOr<void> initCouchbaseLite() async {
+    await CouchbaseLiteFlutter.init(autoEnableVectorSearch: false);
+    Extension.enableVectorSearch();
+  }
 
   @override
   Future<String> resolveTmpDir() => getTemporaryDirectory()
       .then((dir) => Directory.fromUri(dir.uri.resolve('cbl_flutter')).path);
-
-  @override
-  FutureOr<String> loadLargeJsonFixture() => rootBundle
-      .loadString('packages/cbl_e2e_tests/src/fixtures/1000people.json');
 
   @override
   final testFn = (description, body, {Object? skip}) => ft.testWidgets(

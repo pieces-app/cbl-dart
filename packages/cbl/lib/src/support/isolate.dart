@@ -2,15 +2,15 @@ import 'dart:async';
 
 import '../bindings.dart';
 import '../document/common.dart';
+import '../extension.dart';
 import '../fleece/integration/integration.dart';
 import 'errors.dart';
 import 'tracing.dart';
 
+final _bindings = CBLBindings.instance.base;
+
 class InitContext {
-  InitContext({
-    required this.filesDir,
-    required this.tempDir,
-  });
+  InitContext({required this.filesDir, required this.tempDir});
 
   final String filesDir;
   final String tempDir;
@@ -19,11 +19,7 @@ class InitContext {
 }
 
 class IsolateContext {
-  IsolateContext({
-    this.libraries,
-    this.bindings,
-    this.initContext,
-  });
+  IsolateContext({this.libraries, this.bindings, this.initContext});
 
   static IsolateContext? _instance;
 
@@ -52,9 +48,14 @@ class IsolateContext {
 
 /// Initializes this isolate for use of Couchbase Lite, and initializes the
 /// native libraries.
-Future<void> initPrimaryIsolate(IsolateContext context) async {
+Future<void> initPrimaryIsolate(IsolateContext context, {required bool autoEnableVectorSearch}) async {
   await _initIsolate(context);
-  CBLBindings.instance.base.initializeNativeLibraries(context.initContext?.toCbl());
+  _bindings.initializeNativeLibraries(context.initContext?.toCbl());
+
+  if (autoEnableVectorSearch && _bindings.vectorSearchLibraryAvailable && _bindings.systemSupportsVectorSearch) {
+    Extension.enableVectorSearch();
+  }
+
   await _runPostIsolateInitTasks();
 }
 

@@ -62,7 +62,7 @@ mixin ProxyObjectMixin {
     );
   }
 
-  Future<void> Function() get finalizeEarly {
+  Future<void> Function([Request? finalizeRequest]) get finalizeEarly {
     assert(isBoundToTarget);
 
     // Don't capture `this` in the closure of the returned function.
@@ -70,9 +70,9 @@ mixin ProxyObjectMixin {
     final objectId = this.objectId!;
     final channel = this.channel!;
 
-    return () {
+    return ([Request? finalizeRequest]) {
       _proxyObjectFinalizer.detach(finalizerToken);
-      return channel.call(ReleaseObject(objectId));
+      return channel.call(finalizeRequest ?? ReleaseObject(objectId));
     };
   }
 }
@@ -86,7 +86,14 @@ void Function() _finalizer(
       // If the channel has already been closed the target object will be
       // cleaned as part of closing the service.
       if (channel.status == ChannelStatus.open) {
-        await channel.call(ReleaseObject(id));
+        try {
+          await channel.call(ReleaseObject(id));
+        } on ChannelClosedException {
+          // The channel was closed before the response to the release
+          // request arrived. We can safely ignore this. Either the target
+          // object has already been released or it will be released as part
+          // of closing the service.
+        }
       }
       await proxyFinalizer?.call();
     };

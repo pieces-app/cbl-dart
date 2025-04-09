@@ -122,6 +122,9 @@ Future<void> _unpackTarGzArchive(
   Uint8List archiveData,
   String outputDir,
 ) async {
+  // Don't use const constructor to allow for backwards compatibility with
+  // older version of the archive package.
+  // ignore: prefer_const_constructors
   final tarArchiveData = GZipDecoder().decodeBytes(archiveData, verify: true);
   final archive = TarDecoder().decodeBytes(tarArchiveData, verify: true);
   await extractArchiveToDisk(archive, outputDir);
@@ -156,7 +159,13 @@ Future<void> copyDirectoryContents(
         await File(destPath).create(recursive: true);
         await File(entity.resolveSymbolicLinksSync()).copy(destPath);
       } else {
-        await Link(destPath).create(await entity.target());
+        try {
+          await Link(destPath).create(await entity.target());
+        } on PathExistsException {
+          // Links can't be overwritten on some platforms.
+          await Link(destPath).delete();
+          await Link(destPath).create(await entity.target());
+        }
       }
     } else if (entity is File) {
       await entity.copy(destPath);

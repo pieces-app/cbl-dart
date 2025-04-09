@@ -1,3 +1,11 @@
+## 3.3.2
+
+ - **FIX**: resolve absolute path to dart executable Flutter plugin ([#722](https://github.com/cbl-dart/cbl-dart/issues/722)). ([81d78764](https://github.com/cbl-dart/cbl-dart/commit/81d78764fdafb5d8c9e5cdb7961b006130e3922b))
+
+## 3.3.1
+
+ - Update a dependency to the latest release.
+
 ## 3.3.0
 
  - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.

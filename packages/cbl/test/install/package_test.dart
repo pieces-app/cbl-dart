@@ -3,12 +3,27 @@ import 'dart:io';
 import 'package:cbl/src/install/package.dart';
 import 'package:test/test.dart';
 
+import '../utils.dart';
+
 void main() {
+  group('DatabasePackageConfig', () {
+    test('download packages ', () async {
+      final tempCacheDir = tempTestDirectory();
+      final loader = RemotePackageLoader(cacheDir: tempCacheDir.path);
+      final configs = [
+        for (final edition in Edition.values)
+          ...DatabasePackageConfig.all(
+            releases: {Library.cblite: '3.2.0', Library.cblitedart: '8.0.0'},
+            edition: edition,
+          ),
+      ].withoutMacOSonDifferentHost;
+      await Future.wait(configs.map(loader.load));
+    });
+  });
+
   group('VectorSearchPackageConfig', () {
     test('download packages', () async {
-      final tempCacheDir = Directory.systemTemp.createTempSync();
-      addTearDown(() => tempCacheDir.deleteSync(recursive: true));
-
+      final tempCacheDir = tempTestDirectory();
       final loader = RemotePackageLoader(cacheDir: tempCacheDir.path);
       final packageConfigs = VectorSearchPackageConfig.all(release: '1.0.0')
           .withoutMacOSonDifferentHost;

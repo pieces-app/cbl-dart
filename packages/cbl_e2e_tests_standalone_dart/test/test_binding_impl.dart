@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:cbl/cbl.dart';
 import 'package:cbl_dart/cbl_dart.dart';
 import 'package:cbl_dart/src/acquire_libraries.dart';
 import 'package:path/path.dart' as p;
@@ -19,14 +19,13 @@ final class StandaloneDartCblE2eTestBinding extends CblE2eTestBinding {
   @override
   Future<void> initCouchbaseLite() async {
     await setupDevelopmentLibraries();
-    await CouchbaseLiteDart.init(edition: Edition.enterprise);
+    await CouchbaseLiteDart.init(
+      edition: Edition.enterprise,
+      autoEnableVectorSearch: false,
+    );
+    Extension.enableVectorSearch();
   }
 
   @override
   String resolveTmpDir() => p.absolute(p.join('test', '.tmp'));
-
-  @override
-  FutureOr<String> loadLargeJsonFixture() =>
-      File(p.join('test', 'cbl_e2e_tests', 'fixtures', '1000people.json'))
-          .readAsString();
 }

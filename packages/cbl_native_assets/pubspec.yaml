@@ -4,12 +4,13 @@ description: Provides the Couchbase Lite binaries through Dart native assets.
 homepage: https://github.com/cbl-dart/cbl-dart/tree/main/packages/cbl_native_assets
 repository: https://github.com/cbl-dart/cbl-dart
 issue_tracker: https://github.com/cbl-dart/cbl-dart/issues
+publish_to: none
 
 environment:
   sdk: ^3.4.0
 
 dependencies:
-  cbl: ^3.3.0
+  cbl: ^3.4.2+0
 
 dev_dependencies:
   ffigen: ^16.0.0
