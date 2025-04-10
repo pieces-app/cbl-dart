@@ -50,11 +50,9 @@ class IsolateContext {
 /// native libraries.
 Future<void> initPrimaryIsolate(IsolateContext context, {required bool autoEnableVectorSearch}) async {
   await _initIsolate(context);
-  _bindings.initializeNativeLibraries(context.initContext?.toCbl());
 
-  if (autoEnableVectorSearch && _bindings.vectorSearchLibraryAvailable && _bindings.systemSupportsVectorSearch) {
-    Extension.enableVectorSearch();
-  }
+  // JUST directly call the bindings
+  CBLBindings.instance.base.initializeNativeLibraries(context.initContext?.toCbl());
 
   await _runPostIsolateInitTasks();
 }
