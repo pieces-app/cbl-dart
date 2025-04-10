@@ -21,19 +21,20 @@ abstract final class Extension {
   /// the future the `autoEnableVectorSearch` parameter will be removed and this
   /// function will have to be called explicitly.
   static void enableVectorSearch() {
-    if (!_binding.vectorSearchLibraryAvailable) {
-      throw DatabaseException(
-        'The vector search extension library is not available.',
-        DatabaseErrorCode.unsupported,
-      );
-    }
-
-    if (!_binding.systemSupportsVectorSearch) {
-      throw DatabaseException(
-        'The vector search extension is not supported on this system.',
-        DatabaseErrorCode.unsupported,
-      );
-    }
+    // NOTE: lets not run this right now...
+    // if (!_binding.vectorSearchLibraryAvailable) {
+    //   throw DatabaseException(
+    //     'The vector search extension library is not available.',
+    //     DatabaseErrorCode.unsupported,
+    //   );
+    // }
+    //
+    // if (!_binding.systemSupportsVectorSearch) {
+    //   throw DatabaseException(
+    //     'The vector search extension is not supported on this system.',
+    //     DatabaseErrorCode.unsupported,
+    //   );
+    // }
 
     _binding.enableVectorSearch();
   }
