@@ -21,11 +21,7 @@ class LocalAssetsConfiguration {
   /// - [binaryDependencies]: Directory containing the platform-specific native libraries
   /// - [edition]: The Couchbase Lite edition (Community/Enterprise) to use
   /// - [skipVectorSearch]: Whether to exclude vector search capabilities (defaults to false)
-  LocalAssetsConfiguration({
-    required this.binaryDependencies,
-    required this.edition,
-    this.skipVectorSearch = false,
-  });
+  LocalAssetsConfiguration({required this.binaryDependencies, required this.edition, this.skipVectorSearch = false});
 
   /// Directory containing the platform-specific binary dependencies
   final Directory binaryDependencies;
@@ -44,22 +40,22 @@ class LocalAssetsConfiguration {
   /// - 'linux' for Linux
   /// Throws [UnsupportedError] for other platforms.
   String get _platformDir => switch (Platform.operatingSystem) {
-        'macos' => 'macos',
-        'windows' => 'windows',
-        'linux' => 'linux',
-        _ => throw UnsupportedError('Unsupported platform'),
-      };
+    'macos' => 'macos',
+    'windows' => 'windows',
+    'linux' => 'linux',
+    _ => throw UnsupportedError('Unsupported platform'),
+  };
 
   /// Platform-specific hash used to identify the correct binary version.
   ///
   /// These hashes ensure the correct binary version is loaded for each platform.
   /// They are used to create unique paths for storing platform-specific libraries.
   String get _platformHash => switch (Platform.operatingSystem) {
-        'macos' => 'c4f61c9bde1085be63f32dd54ca8829e',
-        'windows' => 'c2ddf39c36bd6ab58d86b27ddc102286',
-        'linux' => '6af4f73a0a0e59cb7e1a272a9fa0828a',
-        _ => throw UnsupportedError('Unsupported platform'),
-      };
+    'macos' => '117acfafef60fce8a3c941c7d9452162',
+    'windows' => '249cdf1e141994049b321be693a2afde',
+    'linux' => 'ca02dabc459e0010b7b7b06d91d22e82',
+    _ => throw UnsupportedError('Unsupported platform'),
+  };
 
   /// Full path to the directory containing the platform-specific libraries
   String get librariesPath {
@@ -102,19 +98,16 @@ class LocalAssetsConfiguration {
     final isAppleFramework = library.appleFrameworkType(os) == AppleFrameworkType.framework;
 
     // Special version handling for macOS dynamic libraries
-    final version = os == OS.macOS && !isAppleFramework
-        ? switch (library) {
-            Library.cblite => '3',
-            Library.cblitedart => '8',
-            Library.vectorSearch => null,
-          }
-        : null;
+    final version =
+        os == OS.macOS && !isAppleFramework
+            ? switch (library) {
+              Library.cblite => '3',
+              Library.cblitedart => '8',
+              Library.vectorSearch => null,
+            }
+            : null;
 
-    return LibraryConfiguration.dynamic(
-      name,
-      version: version,
-      isAppleFramework: isAppleFramework,
-    );
+    return LibraryConfiguration.dynamic(name, version: version, isAppleFramework: isAppleFramework);
   }
 
   /// Resolves the full path to a specific library file.

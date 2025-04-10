@@ -36,11 +36,11 @@ Directory mergedNativeLibrariesInstallDir(
 
   String hardcodedHash = '';
   if (Platform.isMacOS) {
-    hardcodedHash = 'c4f61c9bde1085be63f32dd54ca8829e';
+    hardcodedHash = '117acfafef60fce8a3c941c7d9452162';
   } else if (Platform.isWindows) {
-    hardcodedHash = 'c2ddf39c36bd6ab58d86b27ddc102286';
+    hardcodedHash = '249cdf1e141994049b321be693a2afde';
   } else if (Platform.isLinux) {
-    hardcodedHash = '6af4f73a0a0e59cb7e1a272a9fa0828a';
+    hardcodedHash = 'ca02dabc459e0010b7b7b06d91d22e82';
   }
 
   return Directory(p.join(directory, hardcodedHash));

@@ -49,13 +49,13 @@ get_platform_hash() {
     local os=$1
     case ${os} in
         linux)
-            echo "6af4f73a0a0e59cb7e1a272a9fa0828a"
+            echo "ca02dabc459e0010b7b7b06d91d22e82"
             ;;
         macos)
-            echo "c4f61c9bde1085be63f32dd54ca8829e"
+            echo "117acfafef60fce8a3c941c7d9452162"
             ;;
         windows)
-            echo "c2ddf39c36bd6ab58d86b27ddc102286"
+            echo "249cdf1e141994049b321be693a2afde"
             ;;
     esac
 }
@@ -177,9 +177,9 @@ verify_structure() {
     local base_dir="${BASE_DIR}"
     local expected_dirs=("linux" "macos" "windows")
     local expected_hashes=(
-        "6af4f73a0a0e59cb7e1a272a9fa0828a" # linux
-        "c4f61c9bde1085be63f32dd54ca8829e" # macos
-        "c2ddf39c36bd6ab58d86b27ddc102286" # windows
+        "ca02dabc459e0010b7b7b06d91d22e82" # linux
+        "117acfafef60fce8a3c941c7d9452162" # macos
+        "249cdf1e141994049b321be693a2afde" # windows
     )
 
     # Check base directories exist

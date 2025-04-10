@@ -17,7 +17,7 @@ The `binaryDependencies` directory must follow this structure:
 ```
 binaryDependencies/
 ├── macos/
-│   └── c4f61c9bde1085be63f32dd54ca8829e/
+│   └── 117acfafef60fce8a3c941c7d9452162/
 │       ├── libcblite.3.dylib
 │       ├── libcblitedart.8.dylib
 │       └── CouchbaseLiteVectorSearch.framework/
@@ -25,12 +25,12 @@ binaryDependencies/
 │               └── A/
 │                   └── CouchbaseLiteVectorSearch
 ├── windows/
-│   └── c2ddf39c36bd6ab58d86b27ddc102286/
+│   └── 249cdf1e141994049b321be693a2afde/
 │       ├── cblite.dll
 │       ├── cblitedart.dll
 │       └── CouchbaseLiteVectorSearch.dll
 └── linux/
-    └── 6af4f73a0a0e59cb7e1a272a9fa0828a/
+    └── ca02dabc459e0010b7b7b06d91d22e82/
         ├── libcblite.so
         ├── libcblitedart.so
         └── libCouchbaseLiteVectorSearch.so
@@ -72,9 +72,9 @@ binaryDependencies/
 
 ### Hash Directory Purpose
 Each platform directory contains a subdirectory named with a specific hash:
-- macOS: `c4f61c9bde1085be63f32dd54ca8829e`
-- Windows: `c2ddf39c36bd6ab58d86b27ddc102286`
-- Linux: `6af4f73a0a0e59cb7e1a272a9fa0828a`
+- macOS: `117acfafef60fce8a3c941c7d9452162`
+- Windows: `249cdf1e141994049b321be693a2afde`
+- Linux: `ca02dabc459e0010b7b7b06d91d22e82`
 
 These hash directories serve multiple purposes:
 1. **Version Control**: Ensures correct binary version for each platform
@@ -143,9 +143,9 @@ String _platformDir => switch (Platform.operatingSystem) {
 
 // Platform-specific hash for versioning
 String _platformHash => switch (Platform.operatingSystem) {
-  'macos' => 'c4f61c9bde1085be63f32dd54ca8829e',
-  'windows' => 'c2ddf39c36bd6ab58d86b27ddc102286',
-  'linux' => '6af4f73a0a0e59cb7e1a272a9fa0828a',
+  'macos' => '117acfafef60fce8a3c941c7d9452162',
+  'windows' => '249cdf1e141994049b321be693a2afde',
+  'linux' => 'ca02dabc459e0010b7b7b06d91d22e82',
   _ => throw UnsupportedError('Unsupported platform'),
 };
 ```
