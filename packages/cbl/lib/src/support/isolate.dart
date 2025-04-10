@@ -52,7 +52,7 @@ Future<void> initPrimaryIsolate(IsolateContext context, {required bool autoEnabl
   await _initIsolate(context);
   _bindings.initializeNativeLibraries(context.initContext?.toCbl());
 
-  if (autoEnableVectorSearch && _bindings.vectorSearchLibraryAvailable && _bindings.systemSupportsVectorSearch) {
+  if (autoEnableVectorSearch) {
     Extension.enableVectorSearch();
   }
 
