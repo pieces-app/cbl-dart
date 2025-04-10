@@ -109,7 +109,7 @@ Future<LibrariesConfiguration> acquireLibraries({
 
   // Strategy, take our cache folders + files  ->>> mirror what cbl is expecting:)
   if (Platform.isWindows) {
-    String uuid = 'c2ddf39c36bd6ab58d86b27ddc102286';
+    String uuid = '249cdf1e141994049b321be693a2afde';
 
     // I need to create the following because this is super WONKY....
     Directory cblDirectory =
@@ -203,7 +203,7 @@ Future<LibrariesConfiguration> acquireLibraries({
     //   );
     // }
   } else if (Platform.isMacOS) {
-    String uuid = 'c4f61c9bde1085be63f32dd54ca8829e';
+    String uuid = '117acfafef60fce8a3c941c7d9452162';
 
     // I need to create the following because this is super WONKY....
     Directory cblDirectory = Directory('$nativePackage/couchbase-lite-c-enterprise-3.2.0-macos/libcblite-3.2.0/lib');
