@@ -18,7 +18,7 @@ dependencies:
   sentry: ^8.0.0
 
 dev_dependencies:
-  cbl:
+  cbl_dart:
     git:
       url: git@github.com:pieces-app/cbl-dart.git
       path: packages/cbl_dart
