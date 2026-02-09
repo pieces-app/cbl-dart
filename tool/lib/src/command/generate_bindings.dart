@@ -8,6 +8,7 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:collection/collection.dart';
 import 'package:dart_style/dart_style.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:path/path.dart' as p;
 
 import '../ffigen_config.dart';
@@ -307,7 +308,8 @@ class _NativeBindingsGenerator extends RecursiveAstVisitor {
   String generate(CompilationUnit unit) {
     _buffer.clear();
     visitCompilationUnit(unit);
-    return DartFormatter().format(_buffer.toString());
+    return DartFormatter(languageVersion: Version(3, 6, 0))
+        .format(_buffer.toString());
   }
 
   final StringBuffer _buffer = StringBuffer();

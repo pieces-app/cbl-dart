@@ -2,15 +2,11 @@ name: cbl_dart_repo
 publish_to: none
 
 environment:
-  sdk: ^3.0.0
+  sdk: ">=3.6.0 <4.0.0"
 
 dev_dependencies:
   cbd:
     path: tool
-  daco: ^0.3.0
-  melos: ^6.2.0
+  # daco: ^0.4.0  # excluded: stuck on analyzer ^7.0.0, conflicts with workspace ^8.0.0
+  melos: ^7.4.0
   path: ^1.9.0
-
-dependency_overrides:
-  cbl:
-    path: packages/cbl
