@@ -6,8 +6,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.6.0 <4.0.0"
 
-resolution: workspace
-
 dependencies:
   cbl: ^3.4.2+0
   cbl_flutter: ^3.3.1
