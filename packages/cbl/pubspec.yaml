@@ -23,7 +23,12 @@ dependencies:
   path: ^1.8.0
   stream_channel: ^2.1.0
   synchronized: ^3.0.0
-  web_socket_channel: '>=2.1.0 <4.0.0'
+  web_socket_channel:
+    git:
+      url: git@github.com:pieces-app/http.git
+      path: pkgs/web_socket_channel
+      tag_pattern: 'web_socket_channel-v{{version}}'
+    version: '>=2.1.0 <4.0.0'
 
 dev_dependencies:
   ffigen: ^20.1.1
