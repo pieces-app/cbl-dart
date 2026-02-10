@@ -7,8 +7,14 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
-  cbl: ^3.4.2+0
-  cbl_dart: ^3.3.1
+  cbl:
+    git:
+      url: git@github.com:pieces-app/cbl-dart.git
+      path: packages/cbl
+  cbl_dart:
+    git:
+      url: git@github.com:pieces-app/cbl-dart.git
+      path: packages/cbl_dart
   cbl_sentry:
     path: ..
   sentry: ^9.8.0
