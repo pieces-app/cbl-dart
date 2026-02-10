@@ -4,8 +4,6 @@ publish_to: none
 environment:
   sdk: ">=3.6.0 <4.0.0"
 
-resolution: workspace
-
 dev_dependencies:
   cbd:
     path: tool
